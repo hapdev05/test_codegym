@@ -2,11 +2,11 @@
 using namespace std;
 
 bool chiaHetCho3(int n) {
+
     return n % 3 == 0;
 }
 
-int main() {
-    int n;
+int* nhapMang(int& n) {
     cout << "Nhap so luong phan tu: ";
     cin >> n;
     
@@ -18,8 +18,12 @@ int main() {
         cin >> arr[i];
     }
     
+    return arr;
+}
+
+int timSoLonNhatChiaHet3(int* arr, int n, bool& timThay) {
     int maxChiaHet3 = -1;
-    bool timThay = false;
+    timThay = false;
     
     for(int i = 0; i < n; i++) {
         if(chiaHetCho3(arr[i])) {
@@ -30,12 +34,29 @@ int main() {
         }
     }
     
+    return maxChiaHet3;
+}
+
+void inKetQua(int maxChiaHet3, bool timThay) {
     if(timThay) {
         cout << "So lon nhat chia het cho 3 la: " << maxChiaHet3 << endl;
     } else {
-        cout << "Khong co so nao chia het cho 3" << endl;
+        cout << "Khong co " << endl;
+    }
+}
+
+int main() {
+    
+    int n;
+    int* arr = nhapMang(n);
+    while (n <= 0) {
+        cout << "So luong phan tu khong hop le. Vui long nhap lai: "<< endl;
+        int* arr = nhapMang(n);
+        bool timThay;
+        int maxChiaHet3 = timSoLonNhatChiaHet3(arr, n, timThay);
+        inKetQua(maxChiaHet3, timThay);
     }
     
-    delete[] arr;
+     
     return 0;
 }
